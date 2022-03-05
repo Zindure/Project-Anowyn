@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
         public float speed = 12f;
+    public Animator animator;
 
     // Update is called once per frame
     void Update()
@@ -15,7 +16,14 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = new Vector3(x, 0f, z);
-
+        animator.SetFloat("Horizontal", move.x);
+        animator.SetFloat("Vertical", move.z);
+        animator.SetFloat("Speed", move.sqrMagnitude);
         controller.Move(move * speed * Time.deltaTime);
+
+    }
+    void FixedUpdate()
+    {
+
     }
 }
